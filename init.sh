@@ -1,5 +1,9 @@
+#!/bin/bash
+
+
 # CNI plugin yaml https://kubernetes.io/docs/concepts/cluster-administration/addons/#networking-and-network-policy
-wget https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+# a custom yaml for iranrepo.ir
+wget https://github.com/SalehBorhani/kubeadm-k8s/blob/main/weave/weave.yaml
 
 # kubeadm
 kubeadm init --pod-network-cidr 10.0.0.0/16  --image-repository docker.iranrepo.ir/kubesphere --kubernetes-version 1.27.1 
