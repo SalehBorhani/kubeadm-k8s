@@ -51,5 +51,9 @@ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://a
 sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl
 
 
+# pull images with kubeadm
+
+kubeadm config images pull  --image-repository docker.iranrepo.ir/kubesphere --kubernetes-version 1.27.1 
+
 
 
