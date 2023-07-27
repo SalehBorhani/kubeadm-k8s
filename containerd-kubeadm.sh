@@ -1,13 +1,12 @@
 #!/bin/bash
-
-
-
 ## Container runtime (containerd) https://github.com/containerd/containerd/blob/main/docs/getting-started.md
+
 wget https://github.com/containerd/containerd/releases/download/v1.7.1/containerd-1.7.1-linux-amd64.tar.gz
 tar Cxzvf /usr/local containerd-1.7.1-linux-amd64.tar.gz
 
 # containerd service 
 wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+mv containerd.service /etc/systemd/system/containerd.service
 systemctl daemon-reload
 systemctl enable --now containerd
 
@@ -17,14 +16,14 @@ install -m 755 runc.amd64 /usr/local/sbin/runc
 
 ## CNI plugin
 wget https://github.com/containernetworking/plugins/releases/download/v1.3.0/cni-plugins-linux-amd64-v1.3.0.tgz
+mkdir -p /opt/cni/bin
 tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.3.0.tgz
 
 ## containerd config
 mkdir -p /etc/containerd
-containerd config default > /etc/containerd/config.toml
-sed -i '/SystemdCgroup/s/false/true/' /etc/containerd/config.toml
-sed -i '/sandbox_image/s/\"registry.k8s.io\/pause:3.6"/\"docker.iranrepo.ir\/kubesphere\/pause:3.9"/' /etc/containerd/config.toml
-systemctl restart containerd
+containerd config default | tee /etc/containerd/config.toml
+sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+sudo systemctl restart containerd
 
 
 
@@ -40,20 +39,24 @@ mount -a
 
 
 # bridge
-modprobe br_netfilter
+sudo modprobe br_netfilter
 echo -e "net.ipv4.ip_forward = 1\nnet.bridge.bridge-nf-call-ip6tables = 1\nnet.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.conf
 sudo sysctl -p
 
+# Set Shecan DNS
+sudo sed -i 's/nameserver .*/nameserver 178.22.122.100/' /etc/resolv.conf
+
 # install kubeadm kubelet kubectl
-apt-get update && apt-get install -y apt-transport-https ca-certificates curl
+sudo apt-get update && sudo apt-get install -y apt-transport-https ca-certificates curl
 curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-get update && sudo apt-get install -y kubeadm
 
 
 # pull images with kubeadm
-
 kubeadm config images pull  --image-repository docker.iranrepo.ir/kubesphere --kubernetes-version 1.27.1 
 
 
-
+# Changing the sandbox image
+sudo sed -i '/sandbox_image/s/\"registry.k8s.io\/pause:3.6"/\"docker.iranrepo.ir\/kubesphere\/pause:3.9"/' /etc/containerd/config.toml
+sudo systemctl restart containerd
