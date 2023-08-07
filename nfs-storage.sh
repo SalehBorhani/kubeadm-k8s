@@ -1,4 +1,5 @@
 #!/bin/bash
+# run this on a dedicated machine for nfs
 # run the script with the number of your workers
 num=$1
 
@@ -11,7 +12,7 @@ mkdir /data
 # adding to exports
 for i in $(seq 1 $num); do
 read -p "input your worker ip address: " ip
-echo "/data $ip(rw,no_subtree_check,no_root_squash)" >> ./ali
+echo "/data $ip(rw,no_subtree_check,no_root_squash)" >> /etc/exports
 done
 
 
