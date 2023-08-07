@@ -60,3 +60,7 @@ kubeadm config images pull  --image-repository docker.iranrepo.ir/kubesphere --k
 # Changing the sandbox image
 sudo sed -i '/sandbox_image/s/\"registry.k8s.io\/pause:3.6"/\"docker.iranrepo.ir\/kubesphere\/pause:3.9"/' /etc/containerd/config.toml
 sudo systemctl restart containerd
+
+
+# installing nfs-client (used in workers , we want to clone the vm so why not install it)
+apt install -y nfs-common
