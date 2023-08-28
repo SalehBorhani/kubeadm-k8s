@@ -4,9 +4,9 @@ Setting up k8s clusters with `kubeadm`.
 There are three bash scripts for the `master` node setup.     
 you can clone your vm and join them to the `master` node.     
 
-# setup master and slaves
+# setup master and worker
 
-Setting up master and cloning it for slave usage.
+Setting up master and cloning it for worker usage.
 
 * find more info in [containerd-kubeadm](./containerd-kubeadm.sh) comments.
 
