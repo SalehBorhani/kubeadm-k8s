@@ -47,7 +47,8 @@ helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs
   --namespace nfs-provisioner \
   --set nfs.server= <nfs server ip address> \
   --set nfs.path=/data --set storageClass.reclaimPolicy=Retain \
-  --set image.repository=salehborhani/nfs-subdir-external-provisioner
+  --set image.repository=salehborhani/nfs-subdir-external-provisioner \
+  --set storageClass.defaultClass=true
 ```
 
 * you may need to change the chart's image registry or image name (403 problem)  
