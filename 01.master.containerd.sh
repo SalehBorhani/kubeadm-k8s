@@ -1,4 +1,7 @@
 #!/bin/bash
+
+## change directory to /tmp
+cd /tmp
 ## Container runtime (containerd) https://github.com/containerd/containerd/blob/main/docs/getting-started.md
 
 wget https://github.com/containerd/containerd/releases/download/v1.7.1/containerd-1.7.1-linux-amd64.tar.gz
@@ -43,7 +46,8 @@ sudo modprobe br_netfilter
 echo -e "net.ipv4.ip_forward = 1\nnet.bridge.bridge-nf-call-ip6tables = 1\nnet.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.conf
 sudo sysctl -p
 
-# Set Shecan DNS
+# backup dns setup & Set Shecan DNS
+cp /etc/resolv.conf /etc/resolv.conf.bak
 sudo sed -i 's/nameserver .*/nameserver 178.22.122.100/' /etc/resolv.conf
 
 # install kubeadm kubelet kubectl
