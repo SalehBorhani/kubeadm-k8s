@@ -8,12 +8,13 @@ you can clone your vm and join them to the `master` node.
 
 Setting up master and cloning it for worker usage.
 
-* find more info in [containerd-kubeadm](./containerd-kubeadm.sh) comments.
+* find more info in [containerd-installation](./01.master.containerd.sh) comments.
 
-* the [kubeadm init](./kubeadm-init.sh) proccess and weave as the `network plugin`
+* the [kubeadm init](./02.master.kubeadm-init.sh) proccess and weave as the `network plugin`
 
-* setting [alias](./zsh-alias-comp.sh) and completion for kubeadm and kubectl
+* setting [alias](./04.master.zsh-completion.sh) and completion for kubeadm and kubectl
 
+* nfs server [setup](./03.nfs.nfs-server.sh) and [helm](./05.master.helm-install.sh) installation  
 
 # storage for k8s
 
