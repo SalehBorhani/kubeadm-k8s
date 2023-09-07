@@ -55,3 +55,19 @@ helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs
 
 
 Now we can easily create pvc and use it for persistence.
+
+# Nginx ingress controller
+
+there is a helm chart for deploying this.   
+
+Install with setting it as the default controller and `30100` port for http and `30200` port for https
+
+```
+helm upgrade --install ingress-main ingress-nginx \
+--repo https://kubernetes.github.io/ingress-nginx \
+--set controller.ingressClassResource.default=true \
+--set controller.service.nodePorts.http="30100" \
+--set controller.service.nodePorts.https="30200" \
+--namespace ingress-nginx --create-namespace
+```
+
