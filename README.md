@@ -27,7 +27,7 @@ this [script](./nfs-storage.sh) is for installing nfs on a dedicated server.
 run it like this :
 
 ```
-./nfs-storage.sh <number of your worker nodes>
+./03.nfs.nfs-server.sh <number of your worker nodes>
 ```
 it will ask for the ip address of your worker nodes.       
 
