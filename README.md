@@ -72,3 +72,16 @@ helm upgrade --install ingress-main ingress-nginx \
 --namespace ingress-nginx --create-namespace
 ```
 
+# metrics-server
+For metrics-server you have to apply the below helm charts:
+```
+helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+```
+```
+helm upgrade --install metrics-server metrics-server/metrics-server \
+--set image.repository=docker.iranrepo.ir/metrics-server/metrics-server:v0.6.4
+```
+Also you should add the following option to the `defaultArgs` section in `values.yml`:
+```
+--kubelet-insecure-tls
+```
