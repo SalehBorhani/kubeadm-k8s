@@ -49,7 +49,7 @@ sudo sysctl -p
 # backup dns setup & Set Shecan DNS
 cp /etc/resolv.conf /etc/resolv.conf.bak
 # added at the end
-#sudo sed -i 's/nameserver .*/nameserver 178.22.122.100/' /etc/resolv.conf
+sudo sed -i 's/nameserver .*/nameserver 178.22.122.100/' /etc/resolv.conf
 
 # install kubeadm kubelet kubectl
 sudo apt-get update && sudo apt-get install -y apt-transport-https ca-certificates curl
@@ -70,4 +70,4 @@ sudo systemctl restart containerd
 # installing nfs-client (used in workers , we want to clone the vm so why not install it)
 apt install -y nfs-common
 
-sudo sed -i 's/nameserver .*/nameserver 178.22.122.100/' /etc/resolv.conf
+#sudo sed -i 's/nameserver .*/nameserver 178.22.122.100/' /etc/resolv.conf
