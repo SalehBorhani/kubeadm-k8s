@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## zsh 
-apt update && apt install -y zsh git
+apt install -y zsh 
 wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 echo Y | sh install.sh
 
