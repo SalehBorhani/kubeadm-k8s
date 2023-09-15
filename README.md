@@ -27,7 +27,7 @@ this [script](./nfs-storage.sh) is for installing nfs on a dedicated server.
 run it like this :
 
 ```
-./nfs-storage.sh <number of your worker nodes>
+./03.nfs.nfs-server.sh <number of your worker nodes>
 ```
 it will ask for the ip address of your worker nodes.       
 
@@ -69,6 +69,7 @@ helm upgrade --install ingress-main ingress-nginx \
 --set controller.ingressClassResource.default=true \
 --set controller.service.nodePorts.http="30100" \
 --set controller.service.nodePorts.https="30200" \
+--set controller.kind="DaemonSet" \
 --namespace ingress-nginx --create-namespace
 ```
 
