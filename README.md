@@ -69,6 +69,7 @@ helm upgrade --install ingress-main ingress-nginx \
 --set controller.ingressClassResource.default=true \
 --set controller.service.nodePorts.http="30100" \
 --set controller.service.nodePorts.https="30200" \
+--set controller.image.registry="docker.iranrepo.ir"
 --set controller.kind="DaemonSet" \
 --namespace ingress-nginx --create-namespace
 ```
