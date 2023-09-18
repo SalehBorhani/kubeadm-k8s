@@ -73,17 +73,28 @@ helm upgrade --install ingress-main ingress-nginx \
 --set controller.kind="DaemonSet" \
 --namespace ingress-nginx --create-namespace
 ```
+# Prometheus-stack 
+Install prom-stack with `prom-operator` password and custom images    
+add `monitoring: prometheus` label to your own namespace , Change the label if you want
 
-# metrics-server
+```
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install prom prometheus-community/kube-prometheus-stack --values 08.helm.prom-stack.yaml
+```
+
+# Prometheus-Adapter
+For adding HPA based on `http_request_per_second`, Install adapter with the helm below command:
+```
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+```
+```
+helm install adapter prometheus-community/prometheus-adapter --values 09.helm-prom-adapter.yaml
+```
+# Metrics-server
 For metrics-server you have to apply the below helm charts:
 ```
 helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
 ```
 ```
-helm upgrade --install metrics-server metrics-server/metrics-server \
---set image.repository=docker.iranrepo.ir/metrics-server/metrics-server
-```
-Also you should add the following option to the `defaultArgs` section in `values.yml`:
-```
---kubelet-insecure-tls
+helm upgrade --install metrics-server metrics-server/metrics-server --values 10.helm.metric-server.yaml
 ```
