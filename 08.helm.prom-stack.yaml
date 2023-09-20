@@ -2990,11 +2990,11 @@ prometheus:
     query: {}
 
     ## If nil, select own namespace. Namespaces to be selected for PrometheusRules discovery.
-    # ruleNamespaceSelector: {}
+    ruleNamespaceSelector: {}
     ## Example which selects PrometheusRules in namespaces with label "prometheus" set to "somelabel"
-    ruleNamespaceSelector:
-      matchLabels:
-        monitoring: prometheus
+    # ruleNamespaceSelector:
+    #   matchLabels:
+    #     monitoring: prometheus
 
     ## If true, a nil or {} value for prometheus.prometheusSpec.ruleSelector will cause the
     ## prometheus resource to be created with selectors based on values in the helm deployment,
@@ -3025,7 +3025,7 @@ prometheus:
     ## prometheus resource to be created with selectors based on values in the helm deployment,
     ## which will also match the servicemonitors created
     ##
-    serviceMonitorSelectorNilUsesHelmValues: true
+    serviceMonitorSelectorNilUsesHelmValues: false
 
     ## ServiceMonitors to be selected for target discovery.
     ## If {}, select all ServiceMonitors
@@ -3036,11 +3036,11 @@ prometheus:
 
     ## Namespaces to be selected for ServiceMonitor discovery.
     ##
-    serviceMonitorNamespaceSelector: {}
+    # serviceMonitorNamespaceSelector: {}
     ## Example which selects ServiceMonitors in namespaces with label "prometheus" set to "somelabel"
-    # serviceMonitorNamespaceSelector:
-    #   matchLabels:
-    #     prometheus: somelabel
+    serviceMonitorNamespaceSelector:
+      matchLabels:
+        monitoring: prometheus 
 
     ## If true, a nil or {} value for prometheus.prometheusSpec.podMonitorSelector will cause the
     ## prometheus resource to be created with selectors based on values in the helm deployment,
