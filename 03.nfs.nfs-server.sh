@@ -1,7 +1,7 @@
 #!/bin/bash
 # run this on a dedicated machine for nfs
 # run the script with the number of your workers
-num=$1
+read -p "Input your number of workers: " num
 
 # nfs server
 apt install -y nfs-server
