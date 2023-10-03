@@ -1,0 +1,21 @@
+kubernetes:
+  hosts:
+    master-01:
+      ansible_host: 185.239.104.22
+      ansible_user: root
+
+    master-02:
+      ansible_host: 185.239.104.251
+      ansible_user: root
+
+    master-03:
+      ansible_host: 185.239.104.182
+      ansible_user: root
+
+    worker-01:
+      ansible_host: 37.152.189.107
+      ansible_user: root
+
+    worker-02:
+      ansible_host: 37.152.191.176
+      ansible_user: root

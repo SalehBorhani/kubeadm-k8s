@@ -1,0 +1,7 @@
+- name: Run kubernetes script on servers
+  hosts: kubernetes
+  tasks:
+   - name: clone the repo
+     ansible.builtin.shell: git clone https://github.com/SalehBorhani/kubeadm-k8s.git
+   - name: run the script
+     ansible.builtin.shell: bash kubeadm-k8s/01.master.containerd.sh
