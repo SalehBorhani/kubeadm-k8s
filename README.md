@@ -14,7 +14,12 @@ Setting up master and cloning it for worker usage.
 
 * setting [alias](./04.master.zsh-completion.sh) and completion for kubeadm and kubectl
 
-* nfs server [setup](./03.nfs.nfs-server.sh) and [helm](./05.master.helm-install.sh) installation  
+* nfs server [setup](./03.nfs.nfs-server.sh) and [helm](./05.master.helm-install.sh) installation
+
+# Run with ansible (In ansible directory)
+```
+ansible-playbook -i inventory.yaml playbook.yaml
+```
 
 # storage for k8s
 
