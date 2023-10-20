@@ -76,7 +76,8 @@ helm upgrade --install ingress-main ingress-nginx \
 --set controller.service.nodePorts.https="30200" \
 --set controller.image.registry="docker.iranrepo.ir" \
 --set controller.kind="DaemonSet" \
---namespace ingress-nginx --create-namespace
+--set controller.admissionWebhooks.patch.image.registry="docker.iranrepo.ir"  \
+--namespace ingress-nginx --create-namespace  --version 4.8.0
 ```
 # Prometheus-stack 
 Install prom-stack with `prom-operator` password and custom images    
