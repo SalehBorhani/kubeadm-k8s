@@ -93,6 +93,7 @@ For metrics-server you have to apply the below helm charts:
 ```
 helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
 helm upgrade --install metrics-server metrics-server/metrics-server --values 10.helm.metric-server.yaml --version 3.11.0
+
 ```
 # Prometheus-Adapter
 For adding HPA based on `http_request_per_second`, Install adapter with the helm below command:
