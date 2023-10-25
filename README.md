@@ -54,7 +54,8 @@ helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs
   --set nfs.server= <nfs server ip address> \
   --set nfs.path=/data --set storageClass.reclaimPolicy=Retain \
   --set image.repository=docker.iranrepo.ir/salehborhani/nfs-subdir-external-provisioner \
-  --set storageClass.defaultClass=true
+  --set storageClass.defaultClass=true \
+  --version 4.0.18
 ```
 
 * you may need to change the chart's image registry or image name (403 problem)  
@@ -85,21 +86,17 @@ add `monitoring: prometheus` label to your own namespace , Change the label if y
 
 ```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm install prom prometheus-community/kube-prometheus-stack --values 08.helm.prom-stack.yaml
+helm install prom prometheus-community/kube-prometheus-stack --values 08.helm.prom-stack.yaml --version 49.0.0
 ```
 # Metrics-server
 For metrics-server you have to apply the below helm charts:
 ```
 helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
-```
-```
-helm upgrade --install metrics-server metrics-server/metrics-server --values 10.helm.metric-server.yaml
+helm upgrade --install metrics-server metrics-server/metrics-server --values 10.helm.metric-server.yaml --version 3.11.0
 ```
 # Prometheus-Adapter
 For adding HPA based on `http_request_per_second`, Install adapter with the helm below command:
 ```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-```
-```
 helm install adapter prometheus-community/prometheus-adapter --values 09.helm-prom-adapter.yaml
 ```
