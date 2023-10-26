@@ -120,7 +120,7 @@ items:
         spec:
           initContainers:
             - name: weave-init
-              image: 'registry.docker.ir/weaveworks/weave-kube:latest'
+              image: 'docker.arvancloud.ir/weaveworks/weave-kube:latest'
               imagePullPolicy: Always
               command:
                 - /home/weave/init.sh
@@ -151,7 +151,7 @@ items:
                     fieldRef:
                       apiVersion: v1
                       fieldPath: spec.nodeName
-              image: 'registry.docker.ir/weaveworks/weave-kube:latest'
+              image: 'docker.arvancloud.ir/weaveworks/weave-kube:latest'
               imagePullPolicy: Always
               readinessProbe:
                 httpGet:
@@ -182,7 +182,7 @@ items:
                     fieldRef:
                       apiVersion: v1
                       fieldPath: spec.nodeName
-              image: 'registry.docker.ir/weaveworks/weave-npc:latest'
+              image: 'docker.arvancloud.ir/weaveworks/weave-npc:latest'
               imagePullPolicy: Always
 #npc-args
               resources:
