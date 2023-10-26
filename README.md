@@ -71,9 +71,7 @@ helm upgrade --install ingress-main ingress-nginx/ingress-nginx \
 --set controller.ingressClassResource.default=true \
 --set controller.service.nodePorts.http="30100" \
 --set controller.service.nodePorts.https="30200" \
---set controller.image.registry="docker.iranrepo.ir" \
 --set controller.kind="DaemonSet" \
---set controller.admissionWebhooks.patch.image.registry="docker.iranrepo.ir"  \
 --namespace ingress-nginx --create-namespace  --version 4.8.0
 ```
 # Prometheus-stack 
