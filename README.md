@@ -86,6 +86,7 @@ Install prom-stack with `prom-operator` password:
 ```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
+
 helm install prom prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace \
 --set prometheus.prometheusSpec.ruleSelectorNilUsesHelmValues=false \
 --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false \
