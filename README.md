@@ -70,8 +70,9 @@ there is a helm chart for deploying this.
 Install with setting it as the default controller and `30100` port for http and `30200` port for https
 
 ```
-helm upgrade --install ingress-main ingress-nginx \
---repo https://kubernetes.github.io/ingress-nginx \
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
+helm upgrade --install ingress-main ingress-nginx/ingress-nginx \
 --set controller.ingressClassResource.default=true \
 --set controller.service.nodePorts.http="30100" \
 --set controller.service.nodePorts.https="30200" \
