@@ -59,11 +59,11 @@ sudo apt-get update && sudo apt-get install -y kubeadm
 
 
 # pull images with kubeadm
-kubeadm config images pull  --image-repository registry.docker.ir/kubesphere --kubernetes-version 1.27.1 
+kubeadm config images pull  --image-repository docker.arvancloud.ir/kubesphere --kubernetes-version 1.27.1 
 
 
 # Changing the sandbox image
-sudo sed -i '/sandbox_image/s/\"registry.k8s.io\/pause:3.8"/\"registry.docker.ir\/kubesphere\/pause:3.9"/' /etc/containerd/config.toml
+sudo sed -i '/sandbox_image/s/\"registry.k8s.io\/pause:3.8"/\"docker.arvancloud.ir\/kubesphere\/pause:3.9"/' /etc/containerd/config.toml
 sudo systemctl restart containerd
 
 
