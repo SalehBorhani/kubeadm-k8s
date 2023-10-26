@@ -96,7 +96,12 @@ helm install prom prometheus-community/kube-prometheus-stack --namespace monitor
 For metrics-server you have to apply the below helm charts:
 ```
 helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
-helm upgrade --install metrics-server metrics-server/metrics-server --values 10.helm.metric-server.yaml --version 3.11.0
+helm upgrade --install metrics-server metrics-server/metrics-server \
+--set-string "defaultArgs[0]=--cert-dir=/tmp" \
+--set-string "defaultArgs[1]=--kubelet-preferred-address-types=InternalIP\,ExternalIP\,Hostname" \
+--set-string "defaultArgs[2]=--kubelet-use-node-status-port" \
+--set-string "defaultArgs[3]=--metric-resolution=15s" \
+--set-string "defaultArgs[4]=--kubelet-insecure-tls" --version 3.11.0
 
 ```
 # Prometheus-Adapter
