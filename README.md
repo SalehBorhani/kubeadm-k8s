@@ -87,7 +87,8 @@ add `monitoring: prometheus` label to your own namespace , Change the label if y
 
 ```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm install prom prometheus-community/kube-prometheus-stack --values 08.helm.prom-stack.yaml --version 49.0.0
+
+helm install prom prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace --values 08.helm.prom-stack.yaml --version 49.0.0
 ```
 # Metrics-server
 For metrics-server you have to apply the below helm charts:
