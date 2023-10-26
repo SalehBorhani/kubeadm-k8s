@@ -16,11 +16,6 @@ Setting up master and cloning it for worker usage.
 
 * nfs server [setup](./03.nfs.nfs-server.sh) and [helm](./05.master.helm-install.sh) installation
 
-# Run with ansible (In ansible directory)
-```
-ansible-playbook -i inventory.yaml playbook.yaml
-```
-
 # storage for k8s
 
 Fastest way for providing your cluster with storage is `nfs` in this matter.    
@@ -104,9 +99,4 @@ helm upgrade --install metrics-server metrics-server/metrics-server \
 --set-string "defaultArgs[4]=--kubelet-insecure-tls" --version 3.11.0
 
 ```
-# Prometheus-Adapter
-For adding HPA based on `http_request_per_second`, Install adapter with the helm below command:
-```
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm install adapter prometheus-community/prometheus-adapter --values 09.helm-prom-adapter.yaml
-```
+
