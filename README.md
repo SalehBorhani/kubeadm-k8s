@@ -101,9 +101,9 @@ helm upgrade --install metrics-server metrics-server/metrics-server \
 # Cached images
 (Ingress)    
 
-* `registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20230407` -> `docker.arvancloud.ir/arpjoker/kube-webhook-certgen:v20230407` (remove digest)
+* `registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20230407` -> `arpjoker/kube-webhook-certgen:v20230407` (remove digest)
 
-* `registry.k8s.io/ingress-nginx/controller:v1.9.0` -> `docker.arvancloud.ir/arpjoker/controller:v1.9.0` (remove digest)
+* `registry.k8s.io/ingress-nginx/controller:v1.9.0` -> `arpjoker/controller:v1.9.0` (remove digest)
 
 (Prometheus)
 * `registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0` -> `arpjoker/kube-webhook-certgen:v20231011-8b53cabe0` (no digest , check to be sure)
