@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: backup
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup
+spec:
+  schedule: "* 5 * * *"
+  failedJobsHistoryLimit: 5
+  successfulJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      backoffLimit: 5
+      template:
+        spec:
+          initContainers:
+            - name: dump 
+              image: "<name_of_db_image>"
+              envFrom:
+              - secretRef:
+                  name: <secret_for_passwords>
+              args:
+                - /bin/sh
+                - -c 
+                - mkdir /tmp/dump ;  D <DUMP_COMMANDS> ; cd /tmp && tar -czvf dump-`date +%Y-%m-%d`.tar.gz ./dump;
+              volumeMounts:
+                - name: dump
+                  mountPath: /tmp
+          containers:
+            - name: dump-upload
+              image: docker.arvancloud.ir/arpjoker/s3cmd:v2
+              envFrom:
+              - secretRef:
+                  name: backup
+              command: ["/bin/bash", "-c"]
+              args:
+              - cd $HOME ; echo -e "[default]\naccess_key = $ACCESS_KEY\nsecret_key = $SECRET_KEY\nhost_base = https://s3.ir-thr-at1.arvanstorage.ir\nhost_bucket = https://s3.ir-thr-at1.arvanstorage.ir\nuse_https = True" >> .s3cfg;
+                s3cmd put dump-`date +%Y-%m-%d`.tar.gz s3://$BUCKET
+              volumeMounts:
+                - name: dump
+                  mountPath: /tmp
+          volumes:
+            - name: dump
+              persistentVolumeClaim:
+                claimName: backup
+          restartPolicy: OnFailure
+
+
+
