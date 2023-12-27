@@ -5,7 +5,7 @@ echo y | kubeadm reset
 read -p "Enter one of your master ip: " IP
 
 # kubeadm
-kubeadm init --control-plane-endpoint $IP:6443 --upload-certs --pod-network-cidr 10.0.0.0/16  --image-repository docker.arvancloud.ir/kubesphere --kubernetes-version 1.27.1 
+kubeadm init --control-plane-endpoint $IP:6443 --upload-certs --pod-network-cidr 10.0.0.0/16  --image-repository registry.docker.ir/kubesphere --kubernetes-version 1.27.1 
 
 mkdir -p $HOME/.kube
 echo yes | sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
