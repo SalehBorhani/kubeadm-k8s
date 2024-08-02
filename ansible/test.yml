@@ -1,0 +1,8 @@
+---
+- name: Use master-01 IP address
+  hosts: kube_control_plane
+  gather_facts: false
+  tasks:
+    - name: Print the IP address of master-01
+      debug:
+        msg: "The IP address of master-01 is {{ hostvars['master-01']['ansible_host'] }}"
