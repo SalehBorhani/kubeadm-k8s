@@ -1,0 +1,4 @@
+bin_dir: /usr/local/bin
+
+kube_apiserver_ip: "{{ hostvars['kube_control_plane']['ansible_host'] }}"
+kube_apiserver_port: 6443
